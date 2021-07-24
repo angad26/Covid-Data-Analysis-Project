@@ -16,7 +16,7 @@ ORDER BY 1,2;
 -- Looking at Total Cases v/s Population
 
 SELECT 
-  location, date, total_cases, population, (total_cases/population)*100 AS Infection_Percentage
+  location, date, total_cases, new_cases, population, (total_cases/population)*100 AS Infection_Percentage
 FROM 
   `portfolio-project-320720.Covid.Covid_Deaths`
 WHERE location = 'India' 
@@ -25,7 +25,7 @@ ORDER BY 1,2;
 -- Looking at countries with highest infection rate as of 2021-07-22
 
 SELECT 
-  location, total_cases, population, (total_cases/population)*100 AS Infection_Percentage
+  date, location, total_cases, population, (total_cases/population)*100 AS Infection_Percentage
 FROM 
   `portfolio-project-320720.Covid.Covid_Deaths`
 WHERE 
@@ -78,4 +78,16 @@ ON
   dea.location = vac.location AND
   dea.date = vac.date
 WHERE 
-  dea.continent IS NOT NULL
+  dea.continent IS NOT NULL;
+
+-- Total deaths, cases and death percentage worldwide as of 2021-07-22
+
+SELECT 
+  total_cases, total_deaths, (total_deaths/total_cases)*100 AS Death_Percentage
+FROM 
+  `portfolio-project-320720.Covid.Covid_Deaths`
+WHERE location = 'World' AND 
+  date = '2021-07-22';
+
+
+
